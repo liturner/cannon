@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -19,14 +19,16 @@ public class Game extends Canvas implements Runnable {
     public static final String NAME = "Game 2D";
     private static final long serialVersionUID = 1L;
 
-    List<GameEntity> gameEntities;
+    final ArrayList<GameEntity> gameEntities = new ArrayList<>();
+
+    final ArrayList<GameEntity> collidables = new ArrayList<>();
 
     KeyboardInput keyboardInput = new KeyboardInput();
 
     private JFrame frame;
     private boolean running = false;
 
-    public Game(List<GameEntity> gameEntities) { 
+    public Game() { 
         setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
         setMaximumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
         setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -43,10 +45,7 @@ public class Game extends Canvas implements Runnable {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        this.createBufferStrategy(2);
-
-        this.gameEntities = gameEntities;
-        
+        this.createBufferStrategy(2);        
     }
 
     public synchronized void start() {
@@ -102,8 +101,20 @@ public class Game extends Canvas implements Runnable {
             keyboardInput.clearKeysUp();
         }
 
+        collidables.clear();
         for(GameEntity entity : gameEntities) {
             entity.onUpdate(deltaTime);
+            if(entity.getCollisionBox().isPresent()) {
+                collidables.add(entity);
+            }
+        }
+
+        for(GameEntity entity1 : collidables) {
+            for(GameEntity entity2 : collidables) {
+                if(entity1.getCollisionBox().get().intersects(entity2.getCollisionBox().get())) {
+                    entity1.onCollision(entity2);
+                }
+            }
         }
     }
 
@@ -125,10 +136,10 @@ public class Game extends Canvas implements Runnable {
                 // Clear Screen
                 graphics.setColor(Color.RED);
                 graphics.fillRect(0, 0, (int) getBounds().getWidth(), (int) getBounds().getHeight());
-
+                
                 // Draw Entities to Screen
                 for(GameEntity entity : this.gameEntities) {
-                    entity.paint(graphics);
+                    entity.onPaint(graphics);
                 }
 
                 // Dispose the graphics
@@ -144,5 +155,9 @@ public class Game extends Canvas implements Runnable {
         // Repeat the rendering if the drawing buffer was lost
         } while (strategy.contentsLost());
         
+    }
+
+    public void addGameEntity(GameEntity gameEntity) {
+        this.gameEntities.add(gameEntity);
     }
 }

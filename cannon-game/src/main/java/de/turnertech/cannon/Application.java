@@ -1,12 +1,9 @@
 package de.turnertech.cannon;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import de.turnertech.cannon.engine.Game;
-import de.turnertech.cannon.engine.GameEntity;
 import de.turnertech.cannon.engine.Log;
 
 public class Application {
@@ -28,12 +25,10 @@ public class Application {
     public static void main(String[] args) {
         
         Log.LOGGER.info("Starting up the Game");
-        Game theGame;
+        Game theGame = new Game();
 
         Log.LOGGER.fine("Creating entities...");
-        List<GameEntity> gameEntities = new ArrayList<>();
-        gameEntities.add(new Player());
-        theGame = new Game(gameEntities);
+        theGame.addGameEntity(new Player());
 
         Log.LOGGER.fine("Running the game...");
         theGame.start();
