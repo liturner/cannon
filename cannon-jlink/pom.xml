@@ -4,28 +4,18 @@
     <parent>
         <groupId>de.turnertech.cannon</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>jlink</artifactId>
     <name>Cannon (JLink)</name>
-    <version>1.0.0-SNAPSHOT</version>
-    <packaging>jlink</packaging> <!-- Will later be jlink, once all dependencies are named modules.... -->
+    <version>1.0.0</version>
+    <packaging>pom</packaging> <!-- Will later be jlink, once all dependencies are named modules.... -->
 
     <description>JLink project to generate the lightweight JRE</description>
 
     <build>
-        <finalName>cannon-${project.version}</finalName>
         <plugins>
-            <plugin>
-                <artifactId>maven-jlink-plugin</artifactId>
-                <extensions>true</extensions>
-                <configuration>
-                    <launcher>Cannon=de.turnertech.cannon/de.turnertech.cannon.Application</launcher>
-                    <noHeaderFiles>true</noHeaderFiles>
-                    <noManPages>true</noManPages>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

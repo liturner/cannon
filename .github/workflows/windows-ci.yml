@@ -16,10 +16,13 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Maven package site
+    - name: Maven package
       run: mvn -B package --no-transfer-progress --file pom.xml
+
+    - name: JPackage
+      run: cannon-jpackage/package.cmd
 
     - name: Publish build
       uses: actions/upload-artifact@v3
       with:
-        path: cannon-jlink/target/cannon-*.zip
+        path: cannon-jpackage/cannon-*.exe
