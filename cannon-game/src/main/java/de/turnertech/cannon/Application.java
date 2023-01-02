@@ -30,12 +30,12 @@ public class Application {
         Log.LOGGER.info("Starting up the Game");
         Game theGame;
 
-        Log.LOGGER.info("Creating entities...");
+        Log.LOGGER.fine("Creating entities...");
         List<GameEntity> gameEntities = new ArrayList<>();
         gameEntities.add(new Player());
         theGame = new Game(gameEntities);
 
-        Log.LOGGER.info("Running the game...");
+        Log.LOGGER.fine("Running the game...");
         theGame.start();
     }
     
