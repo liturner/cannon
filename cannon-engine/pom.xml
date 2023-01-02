@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>de.turnertech.cannon</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>engine</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Cannon (Engine)</name>
+  <description>The engine module, containing the game engine.</description>
+
+  <licenses>
+    <license>
+      <name>CC-BY-4.0</name>
+      <url>https://creativecommons.org/licenses/by/4.0/legalcode.txt</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+</project>

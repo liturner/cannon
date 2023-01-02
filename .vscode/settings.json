@@ -1,0 +1,13 @@
+{
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.maven.downloadSources": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "maven.terminal.favorites": [
+        {
+            "command": "clean compile site site:stage",
+            "debug": false
+        }
+    ]
+}
